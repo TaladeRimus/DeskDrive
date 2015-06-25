@@ -7,7 +7,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
-import controller.DeskDocController;
+import model.DeskDocModel;
 
 public class Servidor {
 	
@@ -15,10 +15,16 @@ public class Servidor {
 		
 		try {
 			
-			DeskDocInterface deskDoc = new DeskDocController();
+			DeskDocInterface deskDoc = new DeskDocModel();
 			LocateRegistry.createRegistry(1099);
-			Naming.rebind("Desk", deskDoc);
-			System.out.println("Servidor iniciado");
+			try {
+
+				Naming.rebind("Desk", deskDoc);
+				System.out.println("Servidor iniciado");
+				
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
 			
 		} catch (RemoteException e) {
 			
