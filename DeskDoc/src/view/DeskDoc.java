@@ -61,9 +61,9 @@ public class DeskDoc extends JFrame {
 						public void run() {
 							try {
 								frame.receiveFromServer();
+								frame.sendToServer();
 								frame.repaint();
 								
-								System.out.println("RECEBI");
 							} catch (RemoteException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -86,10 +86,11 @@ public class DeskDoc extends JFrame {
 	
 
 	/**
-	 * Create the frame.
+	 * Cria o frame do cliente
 	 */
 	public DeskDoc() {
 		
+		startConnection();
 		createItems();
 		addMenus();
 		setItems();
@@ -165,26 +166,31 @@ public class DeskDoc extends JFrame {
 		});
 	}
 
-	public void sendToServer() throws RemoteException{
+	public String sendToServer() throws RemoteException{
 		
-		String arqConteudo = conteudo.getText();
+		String content = doc.getConteudo();
+		System.out.println("Conteudo " + content);
 		
-		doc.setConteudo(arqConteudo);
+		return content;
 		
 	}
 	
 	protected void receiveFromServer() throws RemoteException {
 		
+		try{
 		conteudo.setText(doc.getConteudo());
-		System.out.println("1 " + doc.getConteudo());
+		conteudo.setCaretPosition(doc.getConteudo().length());
+		} catch ( Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
 	public void startConnection(){
 		try {
-			doc = (DeskDocInterface) Naming.lookup("rmi://localhost:1099");
+			doc = (DeskDocInterface) Naming.lookup("rmi://localhost:1099/Desk");
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 	

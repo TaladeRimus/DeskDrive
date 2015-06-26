@@ -11,6 +11,10 @@ public class DeskDocController extends UnicastRemoteObject implements DeskDocInt
 	private static final long serialVersionUID = 1L;
 	String conteudo;
 	
+	public DeskDocController() throws RemoteException{
+		
+	}
+	
 	public DeskDocController(String conteudo) throws RemoteException {
 		this.conteudo = conteudo;
 	
