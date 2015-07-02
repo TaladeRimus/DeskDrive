@@ -44,7 +44,7 @@ public class DeskDoc extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void start() {
 
 		DeskDoc frame = new DeskDoc();
 	
@@ -61,7 +61,6 @@ public class DeskDoc extends JFrame {
 						public void run() {
 							try {
 								frame.receiveFromServer();
-								frame.sendToServer();
 								frame.repaint();
 								
 							} catch (RemoteException e) {
@@ -92,7 +91,6 @@ public class DeskDoc extends JFrame {
 		
 		startConnection();
 		createItems();
-		addMenus();
 		setItems();
 		actions();
 		
@@ -100,36 +98,14 @@ public class DeskDoc extends JFrame {
 	
 	
 	public void createItems(){
-		contentPane = new JPanel();
-		menuBar = new JMenuBar();
-		mnNewMenu = new JMenu("Arquivo");
-		mntmNovo = new JMenuItem("Novo");
-		mntmAbrir = new JMenuItem("Abrir");
-		mntmFechar = new JMenuItem("Fechar");
-		mnNewMenu_1 = new JMenu("Op\u00E7\u00F5es");
-		mntmEnviar = new JMenuItem("Enviar");
-		mntmDesconectar = new JMenuItem("Desconectar");
-		
+		contentPane = new JPanel();		
 	}
 
-	public void addMenus(){
-		
-		menuBar.add(mnNewMenu);
-		mnNewMenu.add(mntmNovo);
-		mnNewMenu.add(mntmAbrir);
-		mnNewMenu.add(mntmFechar);
-		menuBar.add(mnNewMenu_1);
-		mnNewMenu_1.add(mntmEnviar);
-		mnNewMenu_1.add(mntmDesconectar);
-		
-	}
-	
 	public void setItems(){
 		
 		conteudo = new TextArea();
 		setBounds(100, 100, 450, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setJMenuBar(menuBar);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -166,14 +142,7 @@ public class DeskDoc extends JFrame {
 		});
 	}
 
-	public String sendToServer() throws RemoteException{
-		
-		String content = doc.getConteudo();
-		System.out.println("Conteudo " + content);
-		
-		return content;
-		
-	}
+
 	
 	protected void receiveFromServer() throws RemoteException {
 		
