@@ -114,6 +114,22 @@ public class login extends JFrame {
 			}
 		});
 		
+		btn_cadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			
+				cadastraAction();
+				
+			}
+		});
+	}
+	
+	private void cadastraAction() {
+		String username = tf_usuario.getText();
+		String password = pf_password.getText();
+		
+		l = new loginController();
+		l.registro(username, password);
+		
 	}
 	
 	private void loginAction() throws MalformedURLException{

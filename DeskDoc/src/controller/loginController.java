@@ -31,7 +31,7 @@ public class loginController implements loginInterface {
 		}
 		
 		String databaseUser = "postgres";
-		String databasePass = "123456";
+		String databasePass = "123";
 		
 		try {
 			
